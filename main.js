@@ -103,7 +103,7 @@ var update_list=function(){
 	for(i=0,li=hit_list.length;i<li;++i){
 		var chara_ele="<tr>";
 		if(document.getElementById("visible_1").checked){
-			chara_ele+="<td class='align-middle'><img src='./images/"+chara[hit_list[i]].image+"' class='img-thumbnail' width='100' height='100'></td>";
+			chara_ele+="<td class='align-middle'><img src='"+chara[hit_list[i]].image+"' class='img-thumbnail' width='100' height='100'></td>";
 		}
 		if(document.getElementById("visible_2").checked){
 			chara_ele+="<td class='align-middle' bgcolor='"+get_att_color(chara[hit_list[i]].att)+"'>"+chara[hit_list[i]].name+"<br>"+chara[hit_list[i]].class+"<br>"+chara[hit_list[i]].att+"</td>";
