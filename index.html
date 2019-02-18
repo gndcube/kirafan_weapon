@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+		<script type="text/javascript" src="chara.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<title>きらファン専用ぶき</title>
+	</head>
+  	<body>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+		<!--ナビゲーションバー-->
+		<nav class="navbar fixed-top navbar-dark bg-dark">
+ 			<a href="#" class="navbar-brand">きららファンタジア　専用ぶき一覧</a>
+			<form class="form-inline">
+				<div class="form-group">
+  					<input type="text" id="keyword" class="form-control" value="">
+					<input type="text" style="display:none;">
+					<button type="button" class="btn btn-primary" onclick="update_list();">検索</button>
+				</div>
+			</form>
+		</nav>
+
+		<!--設定-->
+		<div class="position-relative" style="top:60px;"/>
+		<button class="btn btn-primary ml-1" data-toggle="collapse" data-target="#setting" aria-expand="false" aria-controls="setting">設定</button>
+		<div class="collapse" id="setting">
+			<div class="card card-body">
+				<div class="bg-light"><strong>表示・非表示</strong></div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="visible_1" checked>
+								<label class="form-check-label" for="visible_1">キャラ</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="visible_2" checked>
+								<label class="form-check-label" for="visible_2">基本情報</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="visible_3" checked>
+								<label class="form-check-label" for="visible_3">武器スキル</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="visible_4" checked>
+								<label class="form-check-label" for="visible_4">自動発動スキル</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="bg-light"><strong>フィルター</strong></div>
+				作品
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_1" checked>
+								<label class="form-check-label" for="title_filter_1">ひだまりスケッチ</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_2" checked>
+								<label class="form-check-label" for="title_filter_2">ゆゆ式</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_3" checked>
+								<label class="form-check-label" for="title_filter_3">Aチャンネル</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_4" checked>
+								<label class="form-check-label" for="title_filter_4">きんいろモザイク</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_5" checked>
+								<label class="form-check-label" for="title_filter_5">がっこうぐらし！</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_6" checked>
+								<label class="form-check-label" for="title_filter_6">ステラのまほう</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_7" checked>
+								<label class="form-check-label" for="title_filter_7">NEW GAME!</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_8" checked>
+								<label class="form-check-label" for="title_filter_8">うらら迷路帖</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_9" checked>
+								<label class="form-check-label" for="title_filter_9">キルミーベイベー</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_10" checked>
+								<label class="form-check-label" for="title_filter_10">桜Trick</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_11" checked>
+								<label class="form-check-label" for="title_filter_11">ブレンド・S</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_12" checked>
+								<label class="form-check-label" for="title_filter_12">夢喰いメリー</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_13" checked>
+								<label class="form-check-label" for="title_filter_13">スロウスタート</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_14" checked>
+								<label class="form-check-label" for="title_filter_14">ゆるキャン△</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_15" checked>
+								<label class="form-check-label" for="title_filter_15">ハナヤマタ</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_16" checked>
+								<label class="form-check-label" for="title_filter_16">こみっくがーるず</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_17" checked>
+								<label class="form-check-label" for="title_filter_17">あんハピ♪</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_18" checked>
+								<label class="form-check-label" for="title_filter_18">けいおん！</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_19" checked>
+								<label class="form-check-label" for="title_filter_19">はるかなレシーブ</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_20" checked>
+								<label class="form-check-label" for="title_filter_20">ご注文はうさぎですか？</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_21" checked>
+								<label class="form-check-label" for="title_filter_21">アニマエール！</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="title_filter_22" checked>
+								<label class="form-check-label" for="title_filter_22">きららファンタジア</label>
+							</div>
+						</div>
+    					<div class="w-100"></div>
+					</div>
+				</div>
+				クラス
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="class_filter_1" checked>
+								<label class="form-check-label" for="class_filter_1">せんし</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="class_filter_2" checked>
+								<label class="form-check-label" for="class_filter_2">まほうつかい</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="class_filter_3" checked>
+								<label class="form-check-label" for="class_filter_3">そうりょ</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="class_filter_4" checked>
+								<label class="form-check-label" for="class_filter_4">ナイト</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="class_filter_5" checked>
+								<label class="form-check-label" for="class_filter_5">アルケミスト</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				属性
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="att_filter_1" checked>
+								<label class="form-check-label" for="att_filter_1">炎属性</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="att_filter_2" checked>
+								<label class="form-check-label" for="att_filter_2">風属性</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="att_filter_3" checked>
+								<label class="form-check-label" for="att_filter_3">土属性</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="att_filter_4" checked>
+								<label class="form-check-label" for="att_filter_4">水属性</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="att_filter_5" checked>
+								<label class="form-check-label" for="att_filter_5">月属性</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="att_filter_6" checked>
+								<label class="form-check-label" for="att_filter_6">陽属性</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				進化回数
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="evo_3" checked>
+								<label class="form-check-label" for="evo_3">3回</label>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="evo_4" checked>
+								<label class="form-check-label" for="evo_4">4回</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="btn btn-primary mt-3" onclick="update_list();">検索</button>
+			</div>
+		</div>
+
+		<!--キャラ一覧-->
+		<table class="table table-bordered mt-2" id="list">
+		</table>
+	</body>
+</html>
