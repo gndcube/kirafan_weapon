@@ -59,7 +59,7 @@ var update_list=function(){
 			}
 		}
 
-		//設定
+		//フィルター
 		if(hit_num==keywords.length){
 			var flag=true;
 
@@ -81,7 +81,7 @@ var update_list=function(){
 				}
 			}
 
-			//属性
+			//属性フィルター
 			for(j=0,lj=att_list.length;j<lj;++j){
 				var att_id="att_filter_"+(j+1);
 				if(att_list[j]==chara[i].att){
@@ -90,7 +90,7 @@ var update_list=function(){
 				}
 			}
 
-			//進化回数
+			//進化回数フィルター
 			if(!document.getElementById("evo_"+chara[i].evo).checked){flag=false;}
 
 			if(flag){
@@ -102,6 +102,20 @@ var update_list=function(){
 	//リスト作成
 	for(i=0,li=hit_list.length;i<li;++i){
 		var chara_ele="<tr>";
+		var chara_skill=""; //武器スキル
+		var chara_pass=""; //自動発動スキル
+
+		//倍率表示設定
+		if(document.getElementById("visible_5").checked){
+			chara_skill=chara[hit_list[i]].skill.replace(/\{([^\{\}]*)\}/g,"<font color='#ff0000'>($1)</font>");
+			chara_pass=chara[hit_list[i]].pass.replace(/\{([^\{\}]*)\}/g,"<font color='#ff0000'>($1)</font>");
+		}
+		else{
+			chara_skill=chara[hit_list[i]].skill.replace(/\{[^\{\}]*\}/g,"");
+			chara_pass=chara[hit_list[i]].pass.replace(/\{[^\{\}]*\}/g,"");
+		}
+
+		//HTML生成
 		if(document.getElementById("visible_1").checked){
 			chara_ele+="<td class='align-middle'><img src='"+chara[hit_list[i]].image+"' class='img-thumbnail' width='100' height='100'></td>";
 		}
@@ -109,10 +123,10 @@ var update_list=function(){
 			chara_ele+="<td class='align-middle' bgcolor='"+get_att_color(chara[hit_list[i]].att)+"'>"+chara[hit_list[i]].name+"<br>"+chara[hit_list[i]].class+"<br>"+chara[hit_list[i]].att+"</td>";
 		}
 		if(document.getElementById("visible_3").checked){
-			chara_ele+="<td class='align-middle"+(chara[hit_list[i]].evo==3?" text-secondary":"")+"'>"+chara[hit_list[i]].skill+"</td>";
+			chara_ele+="<td class='align-middle"+(chara[hit_list[i]].evo==3?" text-secondary":"")+"'>"+chara_skill+"</td>";
 		}
 		if(document.getElementById("visible_4").checked){
-			chara_ele+="<td class='align-middle'>"+chara[hit_list[i]].pass+"</td>";
+			chara_ele+="<td class='align-middle'>"+chara_pass+"</td>";
 		}
 		chara_ele+="</tr>";
 		list_ele.insertAdjacentHTML("beforeend",chara_ele);
