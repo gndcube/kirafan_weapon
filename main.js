@@ -131,6 +131,82 @@ var update_list=function(){
 		chara_ele+="</tr>";
 		list_ele.insertAdjacentHTML("beforeend",chara_ele);
 	}
+
+	//キャラ別ステータス(キャラ詳細)
+	var acc_ele=document.getElementById("accordion"); //アコーディオン
+	acc_ele.textContent="";
+	for(i=0,li=hit_list.length;i<li;++i){
+		var chara_ele="<div class='card'>";
+		var chara_pass=""; //自動発動スキル
+		var chara_sp=""; //とっておき
+		var chara_class1=""; //クラススキル1
+		var chara_class2=""; //クラススキル2
+		var chara_skill=""; //武器スキル
+
+		//倍率表示設定
+		if(document.getElementById("visible_5").checked){
+			chara_pass=chara[hit_list[i]].pass.replace(/\{([^\{\}]*)\}/g,"<font color='#ff0000'>($1)</font>");
+			chara_sp=chara[hit_list[i]].sp.replace(/\{([^\{\}]*)\}/g,"<font color='#ff0000'>($1)</font>");
+			chara_class1=chara[hit_list[i]].class1.replace(/\{([^\{\}]*)\}/g,"<font color='#ff0000'>($1)</font>");
+			chara_class2=chara[hit_list[i]].class2.replace(/\{([^\{\}]*)\}/g,"<font color='#ff0000'>($1)</font>");
+			chara_skill=chara[hit_list[i]].skill.replace(/\{([^\{\}]*)\}/g,"<font color='#ff0000'>($1)</font>");
+		}
+		else{
+			chara_pass=chara[hit_list[i]].pass.replace(/\{[^\{\}]*\}/g,"");
+			chara_sp=chara[hit_list[i]].sp.replace(/\{[^\{\}]*\}/g,"");
+			chara_class1=chara[hit_list[i]].class1.replace(/\{[^\{\}]*\}/g,"");
+			chara_class2=chara[hit_list[i]].class2.replace(/\{[^\{\}]*\}/g,"");
+			chara_skill=chara[hit_list[i]].skill.replace(/\{[^\{\}]*\}/g,"");
+		}
+
+		//ヘッダ
+		chara_ele+="<div class='card-header' id='header_"+i+"'>";
+		chara_ele+="<button class='btn btn-link' type='button' data-toggle='collapse' data-target='#card_"+i+"' aria-expanded='false' aria-controls='card_"+i+"'>";
+		chara_ele+=chara[hit_list[i]].name+"</button></div>";
+		chara_ele+="<div id='card_"+i+"' class='collapse' aria-labelledby='header_"+i+"' data-parent='#accordion'><div class='card-body'>";
+		chara_ele+="<div class='container-fluid'><div class='row'>";
+
+		//画像
+		chara_ele+="<div class='col-2'><img src='"+chara[hit_list[i]].image+"' class='img-thumbnail' width='160' height='160'></div>";
+
+		//作品
+		chara_ele+="<div class='col-10'><div class='bg-light'><strong>作品</strong></div>";
+		chara_ele+=chara[hit_list[i]].title;
+
+		//基本情報
+		chara_ele+="<div class='bg-light'><strong>基本情報</strong></div>";
+		chara_ele+=chara[hit_list[i]].class+"　"+chara[hit_list[i]].att+"<br>";
+		chara_ele+="HP:"+chara[hit_list[i]].hp+"　ATK:"+chara[hit_list[i]].atk+"　MAT:"+chara[hit_list[i]].mat;
+		chara_ele+="　DEF:"+chara[hit_list[i]].def+"　MDF:"+chara[hit_list[i]].mdf+"　SPD:"+chara[hit_list[i]].spd;
+
+		//武器ステータス
+		chara_ele+="<div class='bg-light'><strong>武器ステータス</strong></div>";
+		chara_ele+="ATK:"+chara[hit_list[i]].watk+"　MAT:"+chara[hit_list[i]].wmat;
+		chara_ele+="　DEF:"+chara[hit_list[i]].wdef+"　MDF:"+chara[hit_list[i]].wmdf+"</div></div>";
+
+		//自動発動スキル
+		chara_ele+="<div class='bg-light'><strong>自動発動スキル</strong></div>";
+		chara_ele+=chara_pass;
+
+		//とっておき
+		chara_ele+="<div class='bg-light'><strong>とっておき</strong></div>";
+		chara_ele+=chara_sp;
+
+		//クラススキル1
+		chara_ele+="<div class='bg-light'><strong>クラススキル 1</strong></div>";
+		chara_ele+=chara_class1;
+
+		//クラススキル2
+		chara_ele+="<div class='bg-light'><strong>クラススキル 2</strong></div>";
+		chara_ele+=chara_class2;
+
+		//武器スキル
+		chara_ele+="<div class='bg-light'><strong>武器スキル</strong>"+(chara[hit_list[i]].evo==3?"（進化回数:3）":"")+"</div>";
+		chara_ele+=chara_skill;
+
+		chara_ele+="</div></div></div>";
+		acc_ele.insertAdjacentHTML("beforeend",chara_ele);
+	}
 };
 
 window.onload=function(){
